@@ -1,4 +1,4 @@
-package com.jianxin.spring.config;
+package com.jianxin.spring.datasource;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -20,14 +20,14 @@ public class DataSourceTest implements CommandLineRunner {
     @Resource(name = "h2DataSource")
     private DataSource dataSource;
 
-    @Resource(name = "pgDataSource")
-    private DataSource pgDataSource;
+//    @Resource(name = "pgDataSource")
+//    private DataSource pgDataSource;
 
     @Resource(name = "h2JdbcTemplate")
     private JdbcTemplate h2JdbcTemplate;
 
-    @Resource(name = "pgJdbcTemplate")
-    private JdbcTemplate pgJdbcTemplate;
+//    @Resource(name = "pgJdbcTemplate")
+//    private JdbcTemplate pgJdbcTemplate;
 
     @Override
     public void run(String... args) throws Exception {
@@ -35,14 +35,14 @@ public class DataSourceTest implements CommandLineRunner {
         Connection connection = dataSource.getConnection();
         log.info(connection.toString());
 
-        log.info(pgDataSource.toString());
-        log.info(pgDataSource.getConnection().toString());
+//        log.info(pgDataSource.toString());
+//        log.info(pgDataSource.getConnection().toString());
 
         h2JdbcTemplate.queryForList("select * from student limit 2").forEach(stu -> log.info(stu.toString()));
 
         log.info("_________");
 
-        pgJdbcTemplate.queryForList("select * from eda.student order by class desc limit 2").forEach(stu -> log.info(stu.toString()));
+//        pgJdbcTemplate.queryForList("select * from eda.student order by class desc limit 2").forEach(stu -> log.info(stu.toString()));
 
         connection.close();
     }
