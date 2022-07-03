@@ -1,11 +1,11 @@
 package com.jianxin.spring.config;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.Connection;
 
@@ -17,11 +17,17 @@ import java.sql.Connection;
 @Slf4j
 public class DataSourceTest implements CommandLineRunner {
 
-    @Autowired
+    @Resource(name = "h2DataSource")
     private DataSource dataSource;
 
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    @Resource(name = "pgDataSource")
+    private DataSource pgDataSource;
+
+    @Resource(name = "h2JdbcTemplate")
+    private JdbcTemplate h2JdbcTemplate;
+
+    @Resource(name = "pgJdbcTemplate")
+    private JdbcTemplate pgJdbcTemplate;
 
     @Override
     public void run(String... args) throws Exception {
@@ -29,7 +35,14 @@ public class DataSourceTest implements CommandLineRunner {
         Connection connection = dataSource.getConnection();
         log.info(connection.toString());
 
-        jdbcTemplate.queryForList("select * from student").forEach(stu -> log.info(stu.toString()));
+        log.info(pgDataSource.toString());
+        log.info(pgDataSource.getConnection().toString());
+
+        h2JdbcTemplate.queryForList("select * from student limit 2").forEach(stu -> log.info(stu.toString()));
+
+        log.info("_________");
+
+        pgJdbcTemplate.queryForList("select * from eda.student order by class desc limit 2").forEach(stu -> log.info(stu.toString()));
 
         connection.close();
     }

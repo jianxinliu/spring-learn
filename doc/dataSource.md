@@ -41,3 +41,50 @@ spring:
 1. 完全手动配置
 2. 结合 spring boot 配置
 
+其中一个数据源的配置。
+
+```java
+@Configuration
+@Slf4j
+public class H2DataSourceConfImpl implements DataSourceConf {
+    @Override
+    @Primary
+    @Bean(name = "h2DataSourceProperties")
+    @ConfigurationProperties("spring.datasource.h2")
+    public DataSourceProperties getDataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
+    @Override
+    @Primary
+    @Bean(name = "h2DataSource")
+    public DataSource getDataSource(@Qualifier("h2DataSourceProperties") DataSourceProperties dataSourceProperties) {
+        log.info("h2 dataSource: {}", dataSourceProperties.getUrl());
+        return dataSourceProperties.initializeDataSourceBuilder().build();
+    }
+
+    @Override
+    @Primary
+    @Bean(name = "h2JdbcTemplate")
+    public JdbcTemplate getJdbcTemplate(@Qualifier("h2DataSource") DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
+    @Override
+    public PlatformTransactionManager getTxManager(@Qualifier("h2DataSource") DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+}
+```
+
+注意点：
+
+1. 当有多个数据源时，需要指定一个默认的。使用 `@primary` 指定，或者在使用时显示得指明使用哪个数据源
+2. 配置多个数据源时，需要排除 SpringBoot 进行自动配置的类
+
+```java
+@SpringBootApplication(exclude = {
+		DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class,
+		JdbcTemplateAutoConfiguration.class
+})
+```
