@@ -1,0 +1,7 @@
+spring:
+  dataSource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:testdb
+    username: root
+  h2:
+    console.enabled: true  # ?? h2 ? web ??? /h2-console
