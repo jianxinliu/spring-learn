@@ -23,7 +23,14 @@ spring:
 #  h2:
 #    console.enabled: true  # ?? h2 ? web ??? /h2-console
 
+java:
+  mail:
+    host: smtp.exmail.qq.com
+    port: 25
+    username: xxx@xxx.com
+    password: xxxxx
 
+# 开启 actuator 相关页面，正式环境禁止开放
 management:
   endpoints:
     web:

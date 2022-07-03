@@ -1,5 +1,6 @@
 package com.jianxin.spring.datasource;
 
+import com.jianxin.spring.config.MailConf;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,6 +17,9 @@ import java.sql.Connection;
 @Component
 @Slf4j
 public class DataSourceTest implements CommandLineRunner {
+
+    @Resource
+    private MailConf mailConf;
 
     @Resource(name = "h2DataSource")
     private DataSource dataSource;
@@ -45,5 +49,7 @@ public class DataSourceTest implements CommandLineRunner {
 //        pgJdbcTemplate.queryForList("select * from eda.student order by class desc limit 2").forEach(stu -> log.info(stu.toString()));
 
         connection.close();
+
+        log.info(mailConf.toString());
     }
 }
