@@ -1,9 +1,13 @@
 package com.jianxin.spring.datasource;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -15,9 +19,10 @@ import javax.annotation.Resource;
  * @author jianxinliu
  * @date 2022/07/03 18:32
  */
-@Component
+@SpringBootTest
+@RunWith(SpringRunner.class)
 @Slf4j
-public class TransactionTest implements CommandLineRunner {
+public class TransactionTest {
 
     @Resource
     private TransactionTemplate transactionTemplate;
@@ -25,8 +30,8 @@ public class TransactionTest implements CommandLineRunner {
     @Resource(name = "h2JdbcTemplate")
     private JdbcTemplate h2JdbcTemplate;
 
-    @Override
-    public void run(String... args) throws Exception {
+    @Test
+    public void run() throws Exception {
         log.info("count before tx: {}", getCount());
         transactionTemplate.execute(new TransactionCallbackWithoutResult() {
             @Override

@@ -16,7 +16,7 @@ import javax.sql.DataSource;
  * @author jianxinliu
  * @date 2022/07/03 12:08
  */
-@Configuration
+//@Configuration
 @Slf4j
 public class PgDataSourceConfImpl implements DataSourceConf {
 

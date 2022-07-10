@@ -2,9 +2,11 @@ package com.jianxin.spring.datasource;
 
 import com.jianxin.spring.service.TxTestService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.CommandLineRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
@@ -13,9 +15,10 @@ import javax.annotation.Resource;
  * @author jianxinliu
  * @date 2022/07/03 18:58
  */
-@Component
+@SpringBootTest
+@RunWith(SpringRunner.class)
 @Slf4j
-public class TransactionTest2 implements CommandLineRunner {
+public class TransactionTest2 {
 
     @Resource
     private TxTestService txTestService;
@@ -23,8 +26,8 @@ public class TransactionTest2 implements CommandLineRunner {
     @Resource
     private JdbcTemplate h2JdbcTemplate;
 
-    @Override
-    public void run(String... args) throws Exception {
+    @Test
+    public void run() throws Exception {
         txTestService.insertStudent();
         log.info("AAA: {}", count());
 

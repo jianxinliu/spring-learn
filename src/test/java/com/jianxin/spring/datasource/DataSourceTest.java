@@ -2,9 +2,11 @@ package com.jianxin.spring.datasource;
 
 import com.jianxin.spring.config.MailConf;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.CommandLineRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -14,9 +16,10 @@ import java.sql.Connection;
  * @author jianxinliu
  * @date 2022/07/03 10:54
  */
-@Component
+@SpringBootTest
+@RunWith(SpringRunner.class)
 @Slf4j
-public class DataSourceTest implements CommandLineRunner {
+public class DataSourceTest {
 
     @Resource
     private MailConf mailConf;
@@ -33,8 +36,8 @@ public class DataSourceTest implements CommandLineRunner {
 //    @Resource(name = "pgJdbcTemplate")
 //    private JdbcTemplate pgJdbcTemplate;
 
-    @Override
-    public void run(String... args) throws Exception {
+    @Test
+    public void aa() throws Exception {
         log.info(dataSource.toString());
         Connection connection = dataSource.getConnection();
         log.info(connection.toString());

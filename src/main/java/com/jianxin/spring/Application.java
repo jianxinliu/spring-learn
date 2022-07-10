@@ -6,6 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 		JdbcTemplateAutoConfiguration.class
 })
 @EnableAutoConfiguration
+@ComponentScan(basePackages = "com.jianxin.*")
+@EnableJpaRepositories(basePackages = "com.jianxin.*")
+@EnableTransactionManagement
 @RestController
 public class Application {
 

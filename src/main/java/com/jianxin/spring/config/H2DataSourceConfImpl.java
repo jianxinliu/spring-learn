@@ -17,7 +17,7 @@ import javax.sql.DataSource;
  * @author jianxinliu
  * @date 2022/07/03 11:33
  */
-@Configuration
+//@Configuration
 @Slf4j
 public class H2DataSourceConfImpl implements DataSourceConf {
     @Override
