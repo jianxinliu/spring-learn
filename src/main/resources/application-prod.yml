@@ -3,10 +3,10 @@ spring:
     ansi:
       enabled: always
   datasource:
-      driverClassName: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/springBucks?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
-      username: root
-      password: 123456
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/springBucks?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
   jpa:
     #    hibernate:
     #      ddl-auto: 'create'
@@ -34,3 +34,10 @@ management:
   endpoint:
     health:
       show-details: always
+
+test:
+  foo-test: 123
+  bar: 张三
+  staticName: 张三
+  array: [ 1,2,3,4,5 ]
+  cityMap: "{ 'jack': 'beijing', 'rose': 'shanghai' }"

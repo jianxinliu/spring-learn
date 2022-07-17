@@ -5,6 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
+ * 使用 @ConfigurationProperties 注解从配置中注入整个对象
  * @author jianxinliu
  * @date 2022/07/03 23:25
  */
