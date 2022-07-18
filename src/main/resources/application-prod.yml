@@ -14,6 +14,12 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+  cache:
+    type: redis
+    cache-names: student
+    redis:
+      time-to-live: 50000
+      cache-null-values: false
 
 #  h2:
 #    console.enabled: true  # ?? h2 ? web ??? /h2-console

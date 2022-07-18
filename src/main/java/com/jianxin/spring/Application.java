@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableJpaRepositories(basePackages = "com.jianxin.*")
 @EnableTransactionManagement
 @RestController
+@EnableCaching(proxyTargetClass = true)
 public class Application {
 
 	public static void main(String[] args) {

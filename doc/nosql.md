@@ -79,3 +79,41 @@ public class StudentService {
     }
 }
 ```
+
+## Spring 中的缓存抽象
+
+为不同的缓存提供一层抽象
+
+- 为 Java 方法增加缓存，缓存执行的结果
+- 缓存支持 ConcurrentMap, EhCache, Caffeine, JCache, Redis
+- 接口：
+  - org.springframework.cache.Cache
+  - org.springframework.cache.CacheManager
+
+使用简单 cache (JVM)
+
+1. 使用 `@EnableCaching(proxyTargetClass = true)` 开始缓存支持， 并开启代理
+2. 缓存
+
+```java
+@Service
+@CacheConfig(cacheNames = "student")
+public class SimpleCache {
+
+    @Resource
+    private StudentRepository studentRepository;
+
+    @Cacheable
+    public String getCityByName() {
+        return studentRepository.findByName("jack").getCity();
+    }
+
+    /**
+     * 清理缓存
+     */
+    @CacheEvict
+    public void reload() {}
+}
+```
+
+使用 Redis 作为缓存，只需要做一些配置调整，而不需要调整代码，这就是缓存抽象的好处。
