@@ -18,6 +18,12 @@ spring:
 #  h2:
 #    console.enabled: true  # ?? h2 ? web ??? /h2-console
 
+redis:
+  host: 127.0.0.1
+  maxTotal: 5
+  maxIdle: 5
+  testOnBorrow: true
+
 java:
   mail:
     host: smtp.exmail.qq.com
